@@ -1,1 +1,32 @@
-# flespi-gateway
+# Flespi gateway python library
+
+**flespy-gateway** is a python library.
+
+```python
+>>> from flespi_gateway.gateway import Device
+>>> dv = Device(device_number=device_number, flespi_token=flespi_token)
+>>> telemetry = dv.get_telemetry()
+>>> print(telemetry)
+{'result': [{'id': xxxxxx,
+   'telemetry': {'battery.current': {'ts': 1609521935, 'value': 0},
+    'battery.voltage': {'ts': 1609521935, 'value': 4.049},
+    'can.absolute.load': {'ts': 1609327396, 'value': 23}]
+}
+```
+
+Flespi gateway allows you to send http requests easily.
+
+[![PyPI](https://img.shields.io/pypi/v/flespi-gateway?color=green&label=flespi-gateway)](https://pypi.org/project/flespi-gateway/)
+[![GitHub stars](https://img.shields.io/github/stars/vlavrik/flespi-gateway)](https://github.com/vlavrik/flespi-gateway/stargazers)
+
+## Installing Flespi gateway and Supported Versions
+
+Flespi gateway is available on PyPI:
+
+```console
+$ python3 -m pip install flespi-gateway
+```
+
+Flespi gateway supports Python 3.8+.
+
+## API Reference and User Guide available on [Read the Docs](https://flespi-gateway.readthedocs.io)
