@@ -3,11 +3,11 @@
 
 
 import sys
-import json
+#import json
 import requests
 
 
-class Gateway:
+class Device:
     """Flespi gateway methods.
 
     Parameters:
@@ -80,12 +80,12 @@ class Gateway:
         # snapshot = self._get_handler(link=link)
         # print(type(snapshot))
         # print(len(snapshot))
-        
+
         # with open(output + '.json', 'w') as f:
         #     json.dump(snapshot, f)
-        
+
         # return None
-        #TODO resolve a problem with saving response properly 
+        #TODO resolve a problem with saving response properly
         pass
 
     def get_devices(self, all_devices=False):

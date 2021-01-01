@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(name='flespi-gateway',
-      version='0.0.1',
+      version='0.0.2',
       description='The python wrapper of a gateway rest API of a flespi platform.',
       long_description=long_description,
       long_description_content_type="text/markdown",
