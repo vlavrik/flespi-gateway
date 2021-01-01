@@ -18,6 +18,7 @@ Flespi gateway allows you to send http requests easily.
 
 [![PyPI](https://img.shields.io/pypi/v/flespi-gateway?color=green&label=flespi-gateway)](https://pypi.org/project/flespi-gateway/)
 [![GitHub stars](https://img.shields.io/github/stars/vlavrik/flespi-gateway)](https://github.com/vlavrik/flespi-gateway/stargazers)
+![Read the Docs](https://img.shields.io/readthedocs/flespi-gateway)
 
 ## Installing Flespi gateway and Supported Versions
 
