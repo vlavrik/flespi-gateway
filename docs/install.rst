@@ -24,7 +24,7 @@ You can either clone the public repository::
 
     $ git clone git://github.com/vlavrik/flespi-gateway.git
 
-Or, download the `tarball <https://github.com/vlavrik/flespi-gateway/tarball/master>`_::
+Or, download the `tarball <https://codeload.github.com/vlavrik/flespi-gateway/legacy.tar.gz/main>`_::
 
     $ curl -OL https://github.com/vlavrik/flespi-gateway/tarball/master
     # optionally, zipball is also available (for Windows users).
