@@ -3,14 +3,14 @@
 Installation of Flespi Gateway
 ==============================
 
-This part of the documentation covers the installation of Requests.
+This part of the documentation covers the installation of flespi-gateway.
 The first step to using any software package is getting it properly installed.
 
 
-$ python3 -m pip install flespi-gateway
+PyPi installation of flespi-gateway
 ---------------------------------------
 
-To install flespi-gateway, simply run this simple command in your terminal of choice::
+To install flespi-gateway, run the following command in your terminal of choice::
 
     $ python3 -m pip install flespi-gateway
 
