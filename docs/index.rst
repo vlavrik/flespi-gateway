@@ -1,36 +1,34 @@
-$project
-========
+Flespi gateway
+==============
 
-$project will solve your problem of where to start with documentation,
-by providing a basic explanation of how to do it easily.
+placeholder.
 
-Look how easy it is to use:
+How to use:
 
-    import project
+    import flespi-gateway
     # Get your stuff done
-    project.do_stuff()
+    gw = flespi-gateway
 
 Features
 --------
 
-- Be awesome
-- Make things faster
+- Feature 1
+- Feature 2
 
 Installation
 ------------
 
-Install $project by running:
+Install flespy-gateway by running:
 
     python3 -m pip install project
 
 Contribute
 ----------
 
-- Issue Tracker: github.com/$project/$project/issues
-- Source Code: github.com/$project/$project
+- Issue Tracker: https://github.com/vlavrik/flespi-gateway/issues
+- Source Code: https://github.com/vlavrik/flespi-gateway
 
 Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@google-groups.com
