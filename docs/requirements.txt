@@ -1,3 +1,0 @@
-flespi-gateway
-requests
-numpydoc

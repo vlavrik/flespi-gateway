@@ -35,7 +35,6 @@ instructions for getting the most out of Requests.
    :maxdepth: 2
 
    install
-   quickstart
    
 
 
