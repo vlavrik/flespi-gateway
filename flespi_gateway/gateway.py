@@ -52,8 +52,8 @@ import requests
 class Device:
     """Flespi gateway methods.
 
-    Parameters:
-    -----------
+    Parameters
+    ----------
     flespi_token : str
         Flespi token generated on the flespi platform.
     device_number : int
@@ -95,8 +95,8 @@ class Device:
         #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/telemetry'
         """Python wrapper on flesp API to get the latest telemetry json.
 
-        Returns:
-        --------
+        Returns
+        -------
         telemetry : dict
             The latest telemetry from the device.
         """

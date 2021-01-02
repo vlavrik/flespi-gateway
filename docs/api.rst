@@ -3,8 +3,6 @@
 package API documentation
 =========================
 
-.. _authmodule:
-
 flespi_gateway\.gateway module
 ------------------------------
 
