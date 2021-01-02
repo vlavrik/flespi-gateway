@@ -19,10 +19,10 @@ def convert_unix_ts(timestamp, timezone = "Europe/Berlin"):
 
     Returns
     -------
-    date: str
+    date : str
         Human readable time with a following format: %Y-%m-%d %H:%M:%S
     """
-    
+
     timezone = pytz.timezone(timezone)
     date = datetime.fromtimestamp(timestamp, timezone)
 
