@@ -27,7 +27,7 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+#extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -328,15 +328,32 @@ exclude_patterns = ['zzz']
 numfig = True
 #language = 'ja'
 
-extensions.append('sphinx.ext.todo')
-extensions.append('sphinx.ext.autodoc')
-#extensions.append('sphinx.ext.autosummary')
-extensions.append('sphinx.ext.intersphinx')
-extensions.append('sphinx.ext.mathjax')
-extensions.append('sphinx.ext.viewcode')
-extensions.append('sphinx.ext.graphviz')
+extensions = [
+    'sphinx.ext.autodoc',
+    'numpydoc',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.coverage',
+    'sphinx.ext.doctest',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.ifconfig',
+    'matplotlib.sphinxext.plot_directive',
+    'IPython.sphinxext.ipython_console_highlighting',
+    'IPython.sphinxext.ipython_directive',
+    'sphinx.ext.imgmath',
+]
+
+# extensions.append('sphinx.ext.todo')
+# extensions.append('sphinx.ext.autodoc')
+# #extensions.append('sphinx.ext.autosummary')
+# extensions.append('sphinx.ext.intersphinx')
+# extensions.append('sphinx.ext.mathjax')
+# extensions.append('sphinx.ext.viewcode')
+# extensions.append('sphinx.ext.graphviz')
 
 
 autosummary_generate = True
 html_theme = 'default'
 #source_suffix = ['.rst', '.txt']
+
+
