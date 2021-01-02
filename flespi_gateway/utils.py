@@ -11,10 +11,10 @@ def convert_unix_ts(timestamp, timezone = "Europe/Berlin"):
 
     Parameters
     ----------
-    timestamp: int
+    timestamp : int
         Unix time generated py flespi platform.
 
-    timezone: str
+    timezone : str
         Time zone of the user. Defaoults to: Europe/Berlin
 
     Returns
@@ -22,6 +22,7 @@ def convert_unix_ts(timestamp, timezone = "Europe/Berlin"):
     date: str
         Human readable time with a following format: %Y-%m-%d %H:%M:%S
     """
+    
     timezone = pytz.timezone(timezone)
     date = datetime.fromtimestamp(timestamp, timezone)
 
