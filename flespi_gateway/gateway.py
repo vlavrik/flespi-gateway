@@ -1,5 +1,4 @@
-"""Getting telemetry
-Example NumPy style docstrings.
+"""Getting telemetry Example NumPy style docstrings.
 
 This module demonstrates documentation as specified by the `NumPy
 Documentation HOWTO`_. Docstrings may extend over multiple lines. Sections
