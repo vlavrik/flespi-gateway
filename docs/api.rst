@@ -1,11 +1,11 @@
-.. _api
+.. _api:
 
 package API documentation
 =========================
 
 .. _authmodule:
 
-flespi-gateway\.gateway module
+flespi_gateway\.gateway module
 ------------------------------
 
 .. automodule:: flespi-gateway.gateway
