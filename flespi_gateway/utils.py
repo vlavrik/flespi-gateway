@@ -9,16 +9,16 @@ import pytz
 def convert_unix_ts(timestamp, timezone = "Europe/Berlin"):
     """Utility function to help converting flespi utc unix time output to human readable.
 
-    Parameters:
-    -----------
+    Parameters
+    ----------
     timestamp: int
         Unix time generated py flespi platform.
 
     timezone: str
         Time zone of the user. Defaoults to: Europe/Berlin
 
-    Returns:
-    --------
+    Returns
+    -------
     date: str
         Human readable time with a following format: %Y-%m-%d %H:%M:%S
     """
