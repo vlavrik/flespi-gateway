@@ -8,7 +8,7 @@ package API documentation
 flespi_gateway\.gateway module
 ------------------------------
 
-.. automodule:: flespi-gateway.gateway
+.. automodule:: flespi_gateway.gateway
     :members:
     :undoc-members:
     :show-inheritance:
