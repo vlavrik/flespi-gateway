@@ -1,44 +1,14 @@
-"""Getting telemetry Example NumPy style docstrings.
+"""The Gateway API (full-stack API for telematics devices) provides methods
+to create and manage the flespi telematics hub that jointly provide the
+end-to-end communication between the GPS trackers and your target application.
+This module covers an API for a Device instance of flespi platform. 
 
-This module demonstrates documentation as specified by the `NumPy
-Documentation HOWTO`_. Docstrings may extend over multiple lines. Sections
-are created with a section header followed by an underline of equal length.
+Devices is a virtual representations of the physical trackers on the flespi platform. 
+It allows organizing messages by device (ident), remote device configuration, 
+dedicated long-term storage, access to telemetry.
 
-Example
--------
-Examples can be given using either the ``Example`` or ``Examples``
-sections. Sections support any reStructuredText formatting, including
-literal blocks::
-
-    $ python example_numpy.py
-
-
-Section breaks are created with two blank lines. Section breaks are also
-implicitly created anytime a new section starts. Section bodies *may* be
-indented:
-
-Notes
------
-    This is an example of an indented section. It's like any other section,
-    but the body is indented to help it stand out from surrounding text.
-
-If a section is indented, then a section break is created by
-resuming unindented text.
-
-Attributes
-----------
-module_level_variable1 : int
-    Module level variables may be documented in either the ``Attributes``
-    section of the module docstring, or in an inline docstring immediately
-    following the variable.
-
-    Either form is acceptable, but the two should not be mixed. Choose
-    one convention to document module level variables and be consistent
-    with it.
-
-
-.. _NumPy Documentation HOWTO:
-   https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
+More information on `devices <https://flespi.com/flespi-devices>`_ can be
+found on official webpage of a platform.
 
 """
 
@@ -49,7 +19,14 @@ import requests
 
 
 class Device:
-    """Flespi gateway methods.
+    """Registered device represents an IoT or telematics tracking equipment
+    capable of sending messages to the channel (an entry point to the telematics hub.
+    The most important attributes of a device are device type and configuration.
+    Device type corresponds to the device model. Remember, you must have at least
+    one channel in the gateway that works over the same protocol as the given device type.
+    If you have several channels working over the same protocol, you can connect the device to any of them.
+    Device type defines the schema of the device configuration. Device configuration is a JSON object with fields.
+    The full description of the devices API under following `link <https://flespi.io/docs/#/gw/devices>`_
 
     Parameters
     ----------
@@ -57,6 +34,23 @@ class Device:
         Flespi token generated on the flespi platform.
     device_number : int
         Device number integrated with a flespi platform. Device is a GPS tracker.
+
+    Raises
+    ------
+    AttributeError
+        The ``Raises`` section is a list of all exceptions
+        that are relevant to the interface.
+    ValueError
+        If `param2` is equal to `param1`.
+
+    Examples
+    --------
+    Example of the device initialization.
+
+    >>> from flespi_gateway.gateway import Device
+    >>> device_number = 123456
+    >>> flespi_token = 'my_flespi_platform_token'
+    >>> dv = Device(device_number=device_number, flespi_token=flespi_token)
     """
     def __init__(self, device_number, flespi_token):
         self.device_number = device_number
@@ -98,12 +92,29 @@ class Device:
         -------
         telemetry : dict
             The latest telemetry from the device.
+
+        Examples
+        --------
+        >>> telemetry = dv.get_telemetry()
+        {'result': [{'id': 123456,
+        'telemetry': {'battery.current': {'ts': 1609610197, 'value': 0},
+        'battery.voltage': {'ts': 1609610197, 'value': 4.043},
+        'can.absolute.load': {'ts': 1609605673, 'value': 17},
+        'can.ambient.air.temperature': {'ts': 1609605673, 'value': 3}]}
         """
         link = 'https://flespi.io/gw/devices/{}/telemetry'.format(self.device_number)
         telemetry = self._get_handler(link=link)
         return telemetry
 
     def get_snapshots(self):
+        """Snapshots
+
+        Returns
+        -------
+        snapshots : dict
+            The dict object containing the timestamp when 
+            the snapshot was created.
+        """
         # curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/snapshots''
         link = 'https://flespi.io/gw/devices/{}/snapshots'.format(self.device_number)
         snapshots = self._get_handler(link=link)
@@ -115,6 +126,23 @@ class Device:
         logs = self._get_handler(link=link)
         return logs
     def get_snapshot(self, snapshot, output):
+        """Fetches snapshot file available for device messages.
+
+        Parameters
+        ----------
+        snapshot : int
+            The timestamp of a snapshot created by flespi platform.
+            Available snapshots are fetched vy calling `get_snapshots()`
+            class method.
+        output : str
+            A file name where to save fetched snapshot.
+
+        Examples
+        --------
+        Fetching one of available snapshots.
+
+        >>> dv.get_snapshot(1609610197, 'latest_dataset.json')
+        """
         #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/snapshots/{snapshot-selector}'
         # link = 'https://flespi.io/gw/devices/{}/snapshots/{}'.format(self.device_number, snapshot)
         # print(link)

@@ -1,6 +1,6 @@
 .. _api:
 
-package API documentation
+Python API documentation
 =========================
 
 flespi_gateway\.gateway module
