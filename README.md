@@ -1,5 +1,9 @@
 # Flespi gateway python library
 
+[![Build Status](https://travis-ci.com/vlavrik/flespi-gateway.svg?branch=main)](https://travis-ci.com/vlavrik/flespi-gateway)
+![Read the Docs](https://img.shields.io/readthedocs/flespi-gateway)
+![PyPI](https://img.shields.io/pypi/v/flespi-gateway?label=flespi-gateway)
+
 **flespy-gateway** is a python library.
 
 ```python
@@ -15,11 +19,6 @@
 ```
 
 Flespi gateway allows you to send http requests easily.
-
-[![Build Status](https://travis-ci.com/vlavrik/flespi-gateway.svg?branch=main)](https://travis-ci.com/vlavrik/flespi-gateway)
-![Read the Docs](https://img.shields.io/readthedocs/flespi-gateway)
-![PyPI](https://img.shields.io/pypi/v/flespi-gateway?label=flespi-gateway)
-[![GitHub stars](https://img.shields.io/github/stars/vlavrik/flespi-gateway)](https://github.com/vlavrik/flespi-gateway/stargazers)
 
 ## Installing Flespi gateway and Supported Versions
 
