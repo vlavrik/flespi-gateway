@@ -1,10 +1,13 @@
 language: python
 python:
-  - "3.8.2"
-  - "nightly"
+  - 3.8.2
+  - nightly
 install:
   - pip install -r requirements.txt
   - pip install .
+env:
+  global:
+    secure: q5MybPlVuw+VwL8cWQ15K7x7s9qb5vr1Yhw2XeoiBkeAgansuEo2SdHgRd8x8PkAx+ZxtZDO0XlXzK7d5aGjIVqa3vbUJwjR+jFpObhqh6DS2kaUyavxnIOBCG+mde59FTbLbVkM88sLHb9zj+DMW3SK+lqtgmGPAUgxGnIhmVFMypG6dYiqHBbDVkcuB0upM3dlNmaLEgZR+kX9mBxOaT29gYew9ePZI13GhHmgLeEzPS1TuLsaovafEWwm2GOvVmAoWbFy7zRa3gBcuOQc7gZ5LPu7jN40y23rRaed/7cWRUlKrCSb4n7fNiZ1ZxA5eIvclGnG3yRcRDv5rB7OyFTRTOOTrvD/m8RT1fVOCEEbgWN7iK/irQT+yjv+SEyREr8KMph0RSpYsFBqjU+1LUQs8bod7J8WeDA6r0DpusGu3jrrQVefz7gVsRUKGcZEsUpjj+zTqvDIY2P6BzkkpaBYHkKV9w3jjRF79G8p+kNlQ3bTWW9GjFvnj2uqKedYSn56TKiYEINeHrBNdh+ve5xOTPYWJq9szEPkjLol7d+K3BJs/LhCqpiAF+vl1edQSXjOw+Dc5REqdMdUkWYBaUc1bWv7V7169Pyu44vLNo1nFLkxEPFvlSCdKMkh+/pvO5vjIs6n4tUU9495aC3Yq9/8CwP5qkX3NdYGKnJYuyE=
 script:
   - export FLESPI_TOKEN=$flespi_token
   - export DEVICE=$device
