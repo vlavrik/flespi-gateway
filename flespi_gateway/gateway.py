@@ -37,11 +37,14 @@ class Device:
 
     Raises
     ------
-    AttributeError
-        The ``Raises`` section is a list of all exceptions
-        that are relevant to the interface.
+    TypeError
+        Device number must be integer!
+
+    TypeError
+        Flespi token must be string!
+    
     ValueError
-        If `param2` is equal to `param1`.
+        The length of token must be 64 characters!
 
     Examples
     --------
@@ -54,10 +57,18 @@ class Device:
     """
     def __init__(self, device_number, flespi_token):
         self.device_number = device_number
+        if type(self.device_number) is not int:
+            raise TypeError("Device number must be integer!")
         self.flespi_token = flespi_token
+        if type(self.flespi_token) is not str:
+            raise TypeError("Token must be string!")
+        elif (type(self.flespi_token) is str) and (len(self.flespi_token) != 64):
+            raise ValueError("The length of token must be 64 characters!")
         self.headers = {
             'Accept': 'application/json',
             'Authorization': 'FlespiToken {}'.format(self.flespi_token)}
+
+        
 
     def _get_handler(self, link, params=None):
         try:

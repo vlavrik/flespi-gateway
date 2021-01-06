@@ -1,7 +1,7 @@
 # Flespi gateway python library
 
 [![Build Status](https://travis-ci.com/vlavrik/flespi-gateway.svg?branch=main)](https://travis-ci.com/vlavrik/flespi-gateway)
-![Read the Docs](https://img.shields.io/readthedocs/flespi-gateway)
+[![Documentation Status](https://readthedocs.org/projects/flespi-gateway/badge/?version=latest)](https://flespi-gateway.readthedocs.io/en/latest/?badge=latest)
 ![PyPI](https://img.shields.io/pypi/v/flespi-gateway?label=flespi-gateway)
 
 **flespy-gateway** is a python library.
