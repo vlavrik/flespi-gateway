@@ -6,7 +6,7 @@ from datetime import datetime
 import pytz
 
 
-def convert_unix_ts(timestamp, timezone = "Europe/Berlin"):
+def convert_unix_ts(timestamp, timezone="Europe/Berlin"):
     """Utility function to help converting flespi utc unix time output to human readable.
 
     Parameters
@@ -28,7 +28,7 @@ def convert_unix_ts(timestamp, timezone = "Europe/Berlin"):
 
     return date.strftime('%Y-%m-%d %H:%M:%S')
 
-def convert_human_ts(timestamp, timezone = "Europe/Berlin"):
+def convert_human_ts(timestamp, timezone="Europe/Berlin"):
     """Utility function to help converting user given timestamp to flespi utc unix time.
 
     Parameters
@@ -49,7 +49,6 @@ def convert_human_ts(timestamp, timezone = "Europe/Berlin"):
     >>> print(ts)
     1609578000
     """
-
     timezone = pytz.timezone(timezone)
     date_time_obj = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
     timezone_date_time_obj = timezone.localize(date_time_obj)
