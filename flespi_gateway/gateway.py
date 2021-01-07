@@ -42,7 +42,7 @@ class Device:
 
     TypeError
         Flespi token must be string!
-    
+
     ValueError
         The length of token must be 64 characters!
 
@@ -68,7 +68,7 @@ class Device:
             'Accept': 'application/json',
             'Authorization': 'FlespiToken {}'.format(self.flespi_token)}
 
-        
+
 
     def _get_handler(self, link, params=None):
         try:
@@ -96,7 +96,7 @@ class Device:
         pass
 
     def get_logs(self):
-        """Get logs for specified device. 
+        """Get logs for specified device.
         The request without parameters will return all logs records.
         By default retreieves all logs. Filtering by parameters
         is not imlemented
