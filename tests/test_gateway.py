@@ -2,11 +2,12 @@ import unittest
 import os
 
 from flespi_gateway.gateway import Device
-FLESPI_TOKEN = os.environ.get('FLESPI_TOKEN', None)
-FLESPI_DEVICE_NUMBER = os.environ.get('DEVICE', None)
 
 class TestDevice(unittest.TestCase):
     def setUp(self):
+        FLESPI_TOKEN = os.environ.get('FLESPI_TOKEN', None)
+        FLESPI_DEVICE_NUMBER = os.environ.get('DEVICE', None)
+        print(FLESPI_TOKEN)
         self.dv = Device(device_number=FLESPI_DEVICE_NUMBER, flespi_token=FLESPI_TOKEN)
     
     def test_list_int(self):
