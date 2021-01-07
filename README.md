@@ -28,6 +28,6 @@ Flespi gateway is available on PyPI:
 $ python3 -m pip install flespi-gateway
 ```
 
-Flespi gateway supports Python 3.8+.
+Flespi gateway supports Python 3.6+.
 
 ## API Reference and User Guide available on [Read the Docs](https://flespi-gateway.readthedocs.io)
