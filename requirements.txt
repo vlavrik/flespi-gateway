@@ -1,3 +1,3 @@
-flespi-gateway==0.0.7
+flespi-gateway
 requests
 numpydoc
