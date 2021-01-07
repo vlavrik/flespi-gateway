@@ -9,11 +9,10 @@ class TestDevice(unittest.TestCase):
         FLESPI_DEVICE_NUMBER = int(os.environ.get('DEVICE', None))
         self.dv = Device(device_number=FLESPI_DEVICE_NUMBER, flespi_token=FLESPI_TOKEN)
 
-
     def test_telemetry(self):
         telemetry = self.dv.get_telemetry()
-
         self.assertIsInstance(telemetry, dict)
+
 
 if __name__ == '__main__':
     unittest.main()
