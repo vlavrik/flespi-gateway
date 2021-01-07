@@ -4,7 +4,7 @@ from flespi_gateway.gateway import Device
 
 
 class TestDevice(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         FLESPI_TOKEN = os.environ.get('FLESPI_TOKEN', None)
         FLESPI_DEVICE_NUMBER = int(os.environ.get('DEVICE', None))
         self.dv = Device(device_number=FLESPI_DEVICE_NUMBER, flespi_token=FLESPI_TOKEN)
