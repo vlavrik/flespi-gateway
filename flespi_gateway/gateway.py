@@ -68,8 +68,6 @@ class Device:
             'Accept': 'application/json',
             'Authorization': 'FlespiToken {}'.format(self.flespi_token)}
 
-
-
     def _get_handler(self, link, params=None):
         try:
             response = requests.get(link, params, headers=self.headers)
@@ -126,7 +124,7 @@ class Device:
         settings : dict
             Setting of a cpecified device.
         """
-        #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/settings/{sett-selector}'
+        # curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/settings/{sett-selector}'
         if all:
             link = 'https://flespi.io/gw/devices/{}/settings/all'.format(self.device_number)
             settings = self._get_handler(link=link)
@@ -152,7 +150,7 @@ class Device:
 
         >>> dv.get_snapshot(1609610197, 'latest_dataset.json')
         """
-        #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/snapshots/{snapshot-selector}'
+        # curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/snapshots/{snapshot-selector}'
         # link = 'https://flespi.io/gw/devices/{}/snapshots/{}'.format(self.device_number, snapshot)
         # print(link)
         # snapshot = self._get_handler(link=link)
@@ -163,10 +161,10 @@ class Device:
         #     json.dump(snapshot, f)
 
         # return None
-        #TODO resolve a problem with saving response properly
+        # TODO resolve a problem with saving response properly
 
     def get_messages(self, params=None):
-        #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/messages'
+        # curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/messages'
         """Get specified device messages. The request without
         parameters will return all device messages.
         Reply contains sorted by time messages, in case
@@ -204,7 +202,7 @@ class Device:
         return messages
 
     def get_telemetry(self):
-        #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/telemetry'
+        # curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/{dev-selector}/telemetry'
         """Get specified device telemetry - e.g. latest values of parameters
         from registered messages. Telemetry is updated
         automatically during new messages reception for a device.
@@ -243,7 +241,7 @@ class Device:
         devices : dict
             Fetched devices.
         """
-        #curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/all'
+        # curl -X GET  --header 'Accept: application/json' --header 'Authorization: FlespiToken XXXXXXXXX'  'https://flespi.io/gw/devices/all'
         if all:
             link = "https://flespi.io/gw/devices/all"
         else:

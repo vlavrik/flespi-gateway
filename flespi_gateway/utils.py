@@ -28,8 +28,10 @@ def convert_unix_ts(timestamp, timezone="Europe/Berlin"):
 
     return date.strftime('%Y-%m-%d %H:%M:%S')
 
+
 def convert_human_ts(timestamp, timezone="Europe/Berlin"):
     """Utility function to help converting user given timestamp to flespi utc unix time.
+
 
     Parameters
     ----------
@@ -44,7 +46,6 @@ def convert_human_ts(timestamp, timezone="Europe/Berlin"):
 
     Examples
     --------
-    
     >>> ts = convert_human_ts('2021-01-02 10:00:00')
     >>> print(ts)
     1609578000
