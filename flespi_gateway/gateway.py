@@ -16,6 +16,8 @@ found on official webpage of a platform.
 import sys
 import json
 import requests
+import logging
+
 
 
 class Device:
@@ -67,12 +69,15 @@ class Device:
         self.headers = {
             'Accept': 'application/json',
             'Authorization': 'FlespiToken {}'.format(self.flespi_token)}
+        
+        logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
     def _get_handler(self, link, params=None):
         try:
             response = requests.get(link, params, headers=self.headers)
             if response.status_code == 200:
                 print("Success!")
+                logging.info('Success')
             elif response.status_code == 401:
                 print("Unsuccess, reason:")
                 print(response.json()['errors'])

@@ -5,6 +5,7 @@
 from datetime import datetime
 import pytz
 
+#logging.info('Admin logged in')
 
 def convert_unix_ts(timestamp, timezone="Europe/Berlin"):
     """Utility function to help converting flespi utc unix time output to human readable.
