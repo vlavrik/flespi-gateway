@@ -16,8 +16,6 @@ found on official webpage of a platform.
 import sys
 import json
 import requests
-from flespi_gateway.logger import logger
-
 
 
 class Device:
