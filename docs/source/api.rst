@@ -1,7 +1,7 @@
 .. _api:
 
 Python API documentation
-=========================
+========================
 
 flespi_gateway\.gateway module
 ------------------------------
@@ -11,7 +11,7 @@ flespi_gateway\.gateway module
     :undoc-members:
 
 flespi_gateway\.utils module
-------------------------------
+----------------------------
 
 .. automodule:: flespi_gateway.utils
     :members:
