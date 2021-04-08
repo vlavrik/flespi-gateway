@@ -72,17 +72,18 @@ class Device:
         try:
             response = requests.get(link, params, headers=self.headers)
             if response.status_code == 200:
-                logger.info('Success!')
+                # logger.info('Success!')
+                print('Success')
             elif response.status_code == 401:
                 status_message = response.json()['errors'][0]['reason']
-                logger.error(f"Unsuccess! Reason: {status_message}")
-                logger.info("Please check your token!")
+                # logger.error(f"Unsuccess! Reason: {status_message}")
+                # logger.info("Please check your token!")
             elif response.status_code == 403:
                 print("Unsuccess, reason:")
                 print(response.json()['errors'])
             elif response.status_code == 400:
                 print("Unsuccess, reason:")
-                logger.warning('test warning')
+                # logger.warning('test warning')
                 print(response.json()['errors'])
 
             return response.json()
