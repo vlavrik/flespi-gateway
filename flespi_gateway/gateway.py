@@ -16,7 +16,7 @@ found on official webpage of a platform.
 import sys
 import json
 import requests
-import logging
+from flespi_gateway.logger import logger
 
 
 
@@ -69,24 +69,22 @@ class Device:
         self.headers = {
             'Accept': 'application/json',
             'Authorization': 'FlespiToken {}'.format(self.flespi_token)}
-        
-        logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
     def _get_handler(self, link, params=None):
         try:
             response = requests.get(link, params, headers=self.headers)
             if response.status_code == 200:
-                print("Success!")
-                logging.info('Success')
+                logger.info('Success!')
             elif response.status_code == 401:
-                print("Unsuccess, reason:")
-                print(response.json()['errors'])
-                print("Please check your token!")
+                status_message = response.json()['errors'][0]['reason']
+                logger.error(f"Unsuccess! Reason: {status_message}")
+                logger.info("Please check your token!")
             elif response.status_code == 403:
                 print("Unsuccess, reason:")
                 print(response.json()['errors'])
             elif response.status_code == 400:
                 print("Unsuccess, reason:")
+                logger.warning('test warning')
                 print(response.json()['errors'])
 
             return response.json()
