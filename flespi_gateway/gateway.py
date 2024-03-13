@@ -283,7 +283,7 @@ class Device:
         link = self._build_url('connections/all')
         return self._perform_get_request(link).json()
 
-    def get_logs(self):
+    def get_logs(self, params={'data': '{"from":1702303046,"to":1702317898}'}):
         """
         Fetch and return logs for the specified device.
 
@@ -316,7 +316,7 @@ class Device:
         get_messages : For retrieving messages that may have been logged as part of the device's operation.
         """
         link = self._build_url('logs')
-        return self._perform_get_request(link).json()
+        return self._perform_get_request(link=link, params=params).json()
 
     def get_settings(self, all=True):
         """Get collection of settings matching filter parameters.
