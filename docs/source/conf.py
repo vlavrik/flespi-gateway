@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'flespi-gateway'
-copyright = u'2021 Vladimir Lavrik'
+copyright = u'2024 Vladimir Lavrik'
 author = u'Vladimir Lavrik'
 
 # The version info for the project you're documenting, acts as replacement for

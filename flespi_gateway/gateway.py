@@ -139,6 +139,7 @@ class Device:
     def _put_handler(self, link):
         pass
 
+    # Manage
     def get_devices(self, all=False):
         """
         Retrieve a collection of devices available to the user identified by the token.
@@ -173,6 +174,7 @@ class Device:
         link = "https://flespi.io/gw/devices/all" if all else f"https://flespi.io/gw/devices/{self.device_number}"
         return self._perform_get_request(link).json()
 
+    # History and State
     def get_messages(self, params=None):
         """
         Retrieve messages currently accumulated in the device storage.
@@ -248,6 +250,7 @@ class Device:
         link = self._build_url('telemetry/all')
         return self._perform_get_request(link).json()
 
+    # Connections
     def get_connections(self):
         """
         Retrieve a list of all currently active TCP connections for the specified device.
@@ -283,6 +286,7 @@ class Device:
         link = self._build_url('connections/all')
         return self._perform_get_request(link).json()
 
+    # Utils
     def get_logs(self, params={'data': '{"from":1702303046,"to":1702317898}'}):
         """
         Fetch and return logs for the specified device.
@@ -318,40 +322,126 @@ class Device:
         link = self._build_url('logs')
         return self._perform_get_request(link=link, params=params).json()
 
-    def get_settings(self, all=True):
-        """Get collection of settings matching filter parameters.
+    def get_packets(self, params={'data': '{"from":1702303046,"to":1702317898}'}):
+        """
+        Fetch and return packets for the specified device.
+
+        This method retrieves packets from the Flespi platform for the device identified by the device number. The packets include various operational and diagnostic information that can be useful for troubleshooting and monitoring the device's performance. Packets are sorted by timestamp for a single device query. However, when requesting packets from multiple devices simultaneously, the packets are not sorted by device.
 
         Parameters
         ----------
-        all : bool
-            Indicates retrieval of all settings. Currently, only retrieval of all settings is implemented.
+        None
 
         Returns
         -------
-        settings : dict or None
-            Settings of a specified device, or None if an error occurred.
+        packets : dict or None
+            A dictionary containing the packets for the specified device, sorted by timestamp. Each packet entry includes details such as the packet level, message, and timestamp. Returns None if an error occurred during the request or if there are no packets available.
+
+        Examples
+        --------
+        >>> packets = device.get_packets()
+        >>> print(packets)
+        {'packets': [{'timestamp': 1610000000, 'level': 'info', 'message': 'Packet received'},
+                {'timestamp': 1610000020, 'level': 'warning', 'message': 'Packet loss'},
+                ...]}
+
+        Notes
+        -----
+        - The structure and content of the returned packets dictionary may vary depending on the data available on the Flespi platform for the user's account.
+        - Packets are an essential tool for diagnosing issues and understanding the behavior of the device over time.
+
+        See Also
+        --------
+        get_messages : For retrieving messages that may have been logged as part of the device's operation.
         """
-        if all:
-            link = self._build_url(endpoint='settings/all')
-            # link = f'https://flespi.io/gw/devices/{self.device_number}/settings/all'
+        link = self._build_url('packets')
+        return self._perform_get_request(link=link, params=params).json()
+
+    def get_snapshots(self):
+        """
+        List of archived messages snapshots available for a device.
+
+        Retrieves a list of available snapshots for the specified device, identified by a 'dev-selector'. Snapshots are generated approximately once per day for all device messages and are stored in the archive for a limited time. This method allows users to identify which snapshots are available for download.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        snapshots : dict or None
+            The dict object containing information about available snapshots, including their timestamps and identifiers, or None if an error occurred.
+
+        Examples
+        --------
+        >>> snapshots = device.get_snapshots()
+        >>> print(snapshots)
+        {'snapshots': [{'timestamp': 1610000000, 'id': 'snapshot1'},
+                    {'timestamp': 1610008600, 'id': 'snapshot2'},
+                    ...]}
+
+        Notes
+        -----
+        - The 'dev-selector' is used to specify the device for which to list snapshots, usually by ID, configuration.ident, name, and other criteria.
+        - Snapshots are intended for diagnostic purposes only, such as restoring device messages in case of accidental changes or deletion. They should not be relied upon in production environments.
+        - The availability of snapshots and their periodic generation are not guaranteed, as this is part of internal functionality provided outside of the standard Flespi platform services.
+        - For regular device messages retrieval, always use the GET /gw/devices/{dev-selector}/messages API call instead of snapshots.
+
+        See Also
+        --------
+        get_snapshot : For downloading a specific snapshot identified by its timestamp.
+        get_messages : For retrieving messages from the device, which is the recommended method for regular message access.
+        """
+        link = self._build_url('snapshots')
+        try:
             return self._perform_get_request(link).json()
-        else:
-            # If there's a future implementation planned for when `all` is False, handle it here.
-            # For now, raise an error to indicate the method is not yet implemented for this case.
-            raise NotImplementedError(
-                "Retrieval of filtered settings is not implemented.")
+        except requests.exceptions.HTTPError as http_err:
+            # Specific HTTP error
+            logging.error(f'HTTP error occurred: {http_err}')
+        except requests.exceptions.ConnectionError as conn_err:
+            # Network problem
+            logging.error(f'Connection error occurred: {conn_err}')
+        except requests.exceptions.Timeout as timeout_err:
+            # Request timeout
+            logging.error(f'Request timed out: {timeout_err}')
+        except requests.exceptions.RequestException as req_err:
+            # Catch-all for requests exceptions
+            logging.error(f'Error during request to {link}: {req_err}')
+        except Exception as e:
+            # Non-requests exceptions
+            logging.error(f'An unexpected error occurred: {e}')
+        return None
 
     def get_snapshot(self, output):
-        """Fetches the latest snapshot file available for device messages and saves it to a file.
+        """
+        Download the latest snapshot file available for device messages and saves it to a file.
+
+        This method fetches the most recent snapshot archive for the specified device, identified by a 'dev-selector', and saves it to the specified output file. Snapshots are generated approximately once per day for all device messages and are stored in the archive for a limited time. The 'snapshot-selector' is used to specify the UNIX timestamp of the snapshot to be downloaded, which can be listed using the GET /gw/devices/{dev-selector}/snapshots API call.
 
         Parameters
         ----------
         output : str
-            A file name where to save fetched snapshot.
+            The file path where the downloaded snapshot will be saved.
 
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> device.get_snapshot(output='device_snapshot.zip')
+        Snapshot downloaded and saved to 'device_snapshot.zip'.
+
+        Notes
+        -----
+        - The 'dev-selector' specifies the device for which to download the snapshot, usually by ID, configuration.ident, name, and other criteria.
+        - Snapshots are intended for diagnostic purposes only, such as restoring device messages in case of accidental changes or deletion. They should not be relied upon in production environments.
+        - The availability of snapshots and their periodic generation are not guaranteed, as this is part of internal functionality provided outside of the standard Flespi platform services.
+        - For regular device messages retrieval, always use the GET /gw/devices/{dev-selector}/messages API call instead of snapshots.
+
+        See Also
+        --------
+        get_messages : For retrieving messages from the device, which is the recommended method for regular message access.
         """
         snapshots_info = self.get_snapshots()
         if snapshots_info is None or 'result' not in snapshots_info or not snapshots_info['result']:
@@ -377,31 +467,49 @@ class Device:
         except Exception as e:
             logging.error(f"Failed to fetch or save snapshot data: {e}")
 
-    def get_snapshots(self):
-        """List of archived messages snapshots available for a device.
+    # Remote control: settings
+    def get_settings(self, all=True):
+        """
+        Get collection of settings matching filter parameters.
+
+        Retrieves specified device settings, including their schemes and values, from the Flespi platform. The method allows for selecting settings from specific devices identified by a 'dev-selector', which can target devices by ID, configuration.ident, name, and other criteria. It also supports selecting which settings to return through a 'sett-selector', allowing for the retrieval of all settings or a subset specified by exact setting names.
+
+        Parameters
+        ----------
+        all : bool, optional
+            Indicates retrieval of all settings. If set to True (default), all available device settings are returned. If False, settings must be specified by exact names in a comma-separated format through the 'sett-selector'.
 
         Returns
         -------
-        snapshots : dict or None
-            The dict object containing the timestamp when the snapshot was created, or None if an error occurred.
+        settings : dict or None
+            A dictionary containing the requested device settings, their schemes, and current values. Each setting is represented as a key-value pair within the dictionary, where the key is the setting name and the value is its current value. Returns None if an error occurred during the request.
+
+        Examples
+        --------
+        >>> device_settings = device.get_settings(all=True)
+        >>> print(device_settings)
+        {'settings': {'obd.mileage': {'value': 12345, 'scheme': {...}}, 'backend.server1': {'value': 'http://example.com', 'scheme': {...}}}}
+
+        >>> specific_settings = device.get_settings(all=False)
+        >>> print(specific_settings)
+        {'settings': {'obd.mileage': {'value': 12345, 'scheme': {...}}}}
+
+        Notes
+        -----
+        - The 'dev-selector' and 'sett-selector' functionalities are implied by the method's parameters and usage context. The actual implementation of these selectors depends on the method's internal logic and the API's capabilities.
+        - Device settings are essentially cached shadows of device configuration options stored within Flespi. The 'current' property of each setting reflects its latest known value.
+        - The structure and content of the returned settings dictionary may vary depending on the data available on the Flespi platform for the user's account and the specified selectors.
+
+        See Also
+        --------
+        get_messages : For retrieving messages that may have been affected by the device settings.
         """
-        # link = f'https://flespi.io/gw/devices/{self.device_number}/snapshots'
-        link = self._build_url('snapshots')
-        try:
+        if all:
+            link = self._build_url(endpoint='settings/all')
+            # link = f'https://flespi.io/gw/devices/{self.device_number}/settings/all'
             return self._perform_get_request(link).json()
-        except requests.exceptions.HTTPError as http_err:
-            # Specific HTTP error
-            logging.error(f'HTTP error occurred: {http_err}')
-        except requests.exceptions.ConnectionError as conn_err:
-            # Network problem
-            logging.error(f'Connection error occurred: {conn_err}')
-        except requests.exceptions.Timeout as timeout_err:
-            # Request timeout
-            logging.error(f'Request timed out: {timeout_err}')
-        except requests.exceptions.RequestException as req_err:
-            # Catch-all for requests exceptions
-            logging.error(f'Error during request to {link}: {req_err}')
-        except Exception as e:
-            # Non-requests exceptions
-            logging.error(f'An unexpected error occurred: {e}')
-        return None
+        else:
+            # If there's a future implementation planned for when `all` is False, handle it here.
+            # For now, raise an error to indicate the method is not yet implemented for this case.
+            raise NotImplementedError(
+                "Retrieval of filtered settings is not implemented.")
